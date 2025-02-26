@@ -109,8 +109,65 @@ public class OkeyGame {
      * known by other players. You may first discard duplicates and then
      * the single tiles and tiles that contribute to the smallest chains.
      */
+     //IMPORTANT NOTE: Added null check for the possibility for null exception if an arrays one of the members is null
+     //this normally shouldnt be the case but for precaution they're added , null checks can be removed or reordered after final checks -Kayra
     public void discardTileForComputer() {
         
+        Player currentPlayer = players[currentPlayerIndex];
+        Tile[] playerTiles = currentPlayer.getTiles(); // Get tiles as an array
+    
+        Tile tileToDiscard = null;
+        int minChainSize = 4;
+    
+        //Find if there is a duplicate tile to discard
+        //Picks the first duplicate by order no special way
+        for (int i = 0; i < playerTiles.length - 1; i++) {
+            if (playerTiles[i] != null && playerTiles[i + 1] != null &&
+                playerTiles[i].getValue() == playerTiles[i + 1].getValue()) {
+                tileToDiscard = playerTiles[i];
+                break;
+            }
+        }
+    
+        //If no duplicate found, find a single tile that is not part of any chain
+        if (tileToDiscard == null) {
+            for (Tile tile : playerTiles) {
+                if (tile != null && !currentPlayer.canUseTile(tile)) { // If tile does not contribute to a valid chain
+                    tileToDiscard = tile;
+                    break;
+                }
+            }
+        }
+    
+        //If all tiles contribute to chains, discard from the shortest chain
+        if (tileToDiscard == null) {
+            for (Tile tile : playerTiles) {
+                int chainSize = 0;
+                for (Tile t : playerTiles) {
+                    if (t != null && t.getValue() == tile.getValue()) {
+                        chainSize++;
+                    }
+                }
+                if (chainSize < minChainSize) {
+                    minChainSize = chainSize;
+                    tileToDiscard = tile;
+                }
+            }
+        }
+    
+        //Print the discarded tile and discard the tile.
+        if (tileToDiscard != null) {
+            System.out.println(getCurrentPlayerName() + " discarded " + tileToDiscard.toString());
+            int discardingTilePlace = 0;
+            for (int i = 0; i < playerTiles.length; i++) {
+                if (playerTiles[i].equals(tileToDiscard)) {
+                    discardingTilePlace = i;
+                    break;
+                }
+            }
+            discardTile(discardingTilePlace);//Ps. Used the method but if there is a problem discard can be added manually to discardedPile
+        }
+
     }
 
     /*

@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.ArrayList;
+
 public class OkeyGame {
 
     Player[] players;
@@ -33,7 +36,12 @@ public class OkeyGame {
      * this method assumes the tiles are already shuffled
      */
     public void distributeTilesToPlayers() {
-
+        for (int i = 0; i < players.length; i++) {
+            for (int j = i*14; j < i*14 + 14; j++) {
+                players[i].addTile(tiles[j]); // TODO addTile
+            }
+        }
+        players[0].addTile(tiles[56]); //TODO addTile
     }
 
     /*
@@ -58,7 +66,13 @@ public class OkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts (DA)
      */
     public void shuffleTiles() {
-
+        Random random = new Random();
+        for (int i = 0; i < tiles.length; i++) {
+            int randomInt = random.nextInt(tiles.length);
+            Tile dummy = tiles[randomInt];
+            tiles[randomInt] = tiles[i];
+            tiles[i] = dummy;
+        }
     }
 
     /*

@@ -71,6 +71,46 @@ public class Player {
         }
         return Y && B && R && K;
     }
+
+
+    //Checks if a tile can be added to an chain of an player, 
+    //for incase the provided tile is null returns false to eleminate te case no tiles on the floor
+    //Implemented for the use of computer players
+    public boolean canUseTile(Tile tile) {
+
+        if (tile == null) {
+            return false;
+        }
+        int count = 0;
+        boolean hasY = false;
+        boolean hasB = false;
+        boolean hasR = false;
+        boolean hasK = false;
+    
+        // Check through the player's tiles and count the ones with the same value
+        for (int i = 0; i < numberOfTiles; i++) {
+            if (playerTiles[i] != null && playerTiles[i].getValue() == tile.getValue()) {
+                char color = playerTiles[i].getColor();
+                if (color == 'Y') hasY = true;
+                if (color == 'B') hasB = true;
+                if (color == 'R') hasR = true;
+                if (color == 'K') hasK = true;
+                count++;
+            }
+        }
+    
+        // Check if we already have 3 different colors and this tile adds the missing 4th color
+        if (count == 3) {
+            if (tile.getColor() == 'Y' && !hasY) return true;
+            if (tile.getColor() == 'B' && !hasB) return true;
+            if (tile.getColor() == 'R' && !hasR) return true;
+            if (tile.getColor() == 'K' && !hasK) return true;
+        }
+    
+        return false;
+    }
+
+
     public int findPositionOfTile(Tile t) {
         int tilePosition = -1;
         for (int i = 0; i < numberOfTiles; i++) {

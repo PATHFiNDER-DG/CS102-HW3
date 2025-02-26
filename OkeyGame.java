@@ -92,6 +92,15 @@ public class OkeyGame {
      */
     public void pickTileForComputer() {
 
+        Player currentPlayer = players[currentPlayerIndex];
+
+        if (currentPlayer.canUseTile(lastDiscardedTile)) {
+            getLastDiscardedTile();
+            System.out.println(getCurrentPlayerName() + "picked up the last discraded tile " + lastDiscardedTile.toString());
+        } else {
+            getTopTile();
+            System.out.println(getCurrentPlayerName() + "picked up the top tile.");
+        }
     }
 
     /*
@@ -101,7 +110,7 @@ public class OkeyGame {
      * the single tiles and tiles that contribute to the smallest chains.
      */
     public void discardTileForComputer() {
-
+        
     }
 
     /*

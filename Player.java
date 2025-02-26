@@ -10,14 +10,14 @@ public class Player {
     }
 
     /*
-     * TODO: removes and returns the tile in given index
+     * TODO: removes and returns the tile in given index (MB)
      */
     public Tile getAndRemoveTile(int index) {
         return null;
     }
 
     /*
-     * TODO: adds the given tile to the playerTiles in order
+     * TODO: adds the given tile to the playerTiles in order (AYÇ)
      * should also update numberOfTiles accordingly.
      * make sure playerTiles are not more than 15 at any time
      */
@@ -26,7 +26,7 @@ public class Player {
     }
 
     /*
-     * TODO: checks if this player's hand satisfies the winning condition
+     * TODO: checks if this player's hand satisfies the winning condition (DA)
      * to win this player should have 3 chains of length 4, extra tiles
      * does not disturb the winning condition
      * @return

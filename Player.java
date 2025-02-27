@@ -19,12 +19,16 @@ public class Player {
     }
 
     /*
-     * TODO: adds the given tile to the playerTiles in order (AYÇ)
+     * TODO: adds the given tile to the playerTiles in order (AYÇ) --Done--
      * should also update numberOfTiles accordingly.
      * make sure playerTiles are not more than 15 at any time
      */
     public void addTile(Tile t) {
-
+        if (numberOfTiles < 15)
+        {
+            playerTiles[numberOfTiles] = t;
+            numberOfTiles++;
+        }
     }
 
     /*

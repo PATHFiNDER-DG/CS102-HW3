@@ -76,10 +76,15 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: check if game still continues, should return true if current player (AYÇ)
+     * TODO: check if game still continues, should return true if current player (AYÇ) --Done--
      * finished the game, use isWinningHand() method of Player to decide
      */
     public boolean didGameFinish() {
+
+        if (players[currentPlayerIndex].isWinningHand())
+        {
+            return true;
+        }
         return false;
     }
 

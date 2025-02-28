@@ -45,21 +45,44 @@ public class OkeyGame {
     }
 
     /*
-     * TODO: get the last discarded tile for the current player (FSK)
+     * TODO: get the last discarded tile for the current player (FSK)-DONE-
      * (this simulates picking up the tile discarded by the previous player)
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return null;
+        Tile pickedTile = lastDiscardedTile;
+        if (pickedTile == null)
+        {
+            return "No tile to pick up!";
+        }
+        lastDiscardedTile = null;
+        return "Picked up the discarded tile: " + pickedTile.toString();
+
     }
 
     /*
-     * TODO: get the top tile from tiles array for the current player (FSK)
+     * TODO: get the top tile from tiles array for the current player (FSK)-DONE-
      * that tile is no longer in the tiles array (this simulates picking up the top tile)
-     * it should return the toString method of the tile so that we can print what we picked
+     * it should return the toString method of the tile so that we can print what we picked Ao
      */
     public String getTopTile() {
-        return null;
+
+        if(tiles == null || tiles.length == 0)
+        {
+            return "No tiles left.";
+        }
+
+        Tile [] newTiles = new Tile[tiles.length-1];
+        Tile pickedTile = tiles[tiles.length-1];
+        tiles[tiles.length-1] = null;
+
+        for (int i = 0; i<tiles.length-1; i++)
+        {
+            newTiles[i] = tiles[i];
+        }
+        tiles = newTiles;
+       
+        return pickedTile.toString();
     }
 
     /*

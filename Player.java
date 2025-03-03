@@ -1,4 +1,4 @@
-
+import java.util.Arrays;
 
 public class Player {
     String playerName;
@@ -60,8 +60,8 @@ public class Player {
 */
     public int countNumbers(int i) { 
         int count = 0;
-        for (Tile tile : playerTiles) {
-            if (tile.getValue() == i) count++;
+        for (int j = 0; j < numberOfTiles; j++) {
+            if (playerTiles[j].getValue() == i) count++;
         }
         return count;
     }
@@ -134,11 +134,24 @@ public class Player {
     }
 
     public void displayTiles() {
+        sortTiles();
         System.out.println(playerName + "'s Tiles:");
         for (int i = 0; i < numberOfTiles; i++) {
             System.out.print(playerTiles[i].toString() + " ");
         }
         System.out.println();
+    }
+
+    public void sortTiles() {
+        for (int i = 0; i < numberOfTiles; i++) {
+            for (int j = i+1; j < numberOfTiles; j++) {
+                Tile dummy = playerTiles[i];
+                if (dummy.getValue() > playerTiles[j].getValue()) {
+                    playerTiles[i] = playerTiles[j];
+                    playerTiles[j] = dummy;
+                }
+            }
+        }
     }
 
     public Tile[] getTiles() {

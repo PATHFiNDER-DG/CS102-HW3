@@ -56,8 +56,8 @@ public class OkeyGame {
             return "No tile to pick up!";
         }
         lastDiscardedTile = null;
-
-        return pickedTile.toString();
+        players[getCurrentPlayerIndex()].addTile(pickedTile);
+        return "Picked up the discarded tile: " + pickedTile.toString();
 
     }
 
@@ -67,7 +67,7 @@ public class OkeyGame {
      * it should return the toString method of the tile so that we can print what we picked Ao
      */
     public String getTopTile() {
-        
+
         boolean tileLeft = false;
         for (Tile tile : tiles) {
             if (tile != null) {
@@ -89,7 +89,7 @@ public class OkeyGame {
             newTiles[i] = tiles[i];
         }
         tiles = newTiles;
-       
+        players[getCurrentPlayerIndex()].addTile(pickedTile);
         return pickedTile.toString();
     }
 
@@ -111,7 +111,6 @@ public class OkeyGame {
      * finished the game, use isWinningHand() method of Player to decide
      */
     public boolean didGameFinish() {
-
         boolean tileLeft = false;
         for (Tile tile : tiles) {
             if (tile != null) {
@@ -120,10 +119,9 @@ public class OkeyGame {
         }
 
         if (players[currentPlayerIndex].isWinningHand())
-        {
-            return true;
+        {return true;
         } else if (!tileLeft) {
-            
+
             return true;
         }
         return false;
@@ -141,27 +139,20 @@ public class OkeyGame {
         Player currentPlayer = players[currentPlayerIndex];
 
         if (currentPlayer.canUseTile(lastDiscardedTile)) {
-
-            players[currentPlayerIndex].addTile(lastDiscardedTile);
-            System.out.println(getCurrentPlayerName() + " picked up the last discraded tile " + getLastDiscardedTile());
-            ;
+            System.out.println(getLastDiscardedTile());
         } else {
-
             boolean tileLeft = false;
             for (Tile tile : tiles) {
                 if (tile != null) {
                     tileLeft = true;
                 }
             }
-    
+
             if(tileLeft) {
-                players[currentPlayerIndex].addTile(tiles[0]);
-                System.out.println(getCurrentPlayerName() + " picked up the top tile.");
-            }
-            
-            
-            
+            getTopTile();
+            System.out.println(getCurrentPlayerName() + " picked up the top tile.");
         }
+    }
     }
 
     /*
@@ -219,7 +210,6 @@ public class OkeyGame {
         //Print the discarded tile and discard the tile.
         if (tileToDiscard != null) {
             System.out.println(getCurrentPlayerName() + " discarded " + tileToDiscard.toString());
-            System.out.println();
             int discardingTilePlace = 0;
             for (int i = 0; i < playerTiles.length; i++) {
                 if (playerTiles[i].equals(tileToDiscard)) {
@@ -257,6 +247,9 @@ public class OkeyGame {
 
       public String getCurrentPlayerName() {
         return players[currentPlayerIndex].getName();
+    }
+    public Player getCurrentPlayer() {
+        return players[currentPlayerIndex];
     }
 
     public void passTurnToNextPlayer() {

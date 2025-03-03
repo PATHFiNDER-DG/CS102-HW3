@@ -4,7 +4,7 @@ public class Player {
     String playerName;
     Tile[] playerTiles;
     int numberOfTiles;
-
+    Tile returned;
     public Player(String name) {
         setName(name);
         playerTiles = new Tile[15]; // there are at most 15 tiles a player owns at any time
@@ -15,7 +15,15 @@ public class Player {
      * TODO: removes and returns the tile in given index (MB)
      */
     public Tile getAndRemoveTile(int index) {
-        return null;
+        returned = playerTiles[index];
+        for (int i = index; i < numberOfTiles - 1; i++) {
+            playerTiles[i] = playerTiles[i + 1];
+        }
+    
+        playerTiles[numberOfTiles - 1] = null; 
+        numberOfTiles--; 
+
+        return returned;
     }
 
     /*

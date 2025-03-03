@@ -203,8 +203,8 @@ public class OkeyGame {
      * this should set lastDiscardedTile variable and remove that tile from
      * that player's tiles
      */
-    public void discardTile(int tileIndex) {
-
+   public void discardTile(int tileIndex) {
+        lastDiscardedTile = players[0].getAndRemoveTile(tileIndex);
     }
 
     public void displayDiscardInformation() {

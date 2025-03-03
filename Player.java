@@ -111,8 +111,8 @@ public class Player {
             }
         }
     
-        // Check if we already have 3 different colors and this tile adds the missing 4th color
-        if (count == 3) {
+        // Check if we already have 3 different colors and this tile adds the missing 3th or 4th color
+        if (count == 2 || count == 3) {
             if (tile.getColor() == 'Y' && !hasY) return true;
             if (tile.getColor() == 'B' && !hasB) return true;
             if (tile.getColor() == 'R' && !hasR) return true;

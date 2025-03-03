@@ -174,10 +174,13 @@ public class OkeyGame {
         //Find if there is a duplicate tile to discard
         //Picks the first duplicate by order no special way
         for (int i = 0; i < playerTiles.length - 1; i++) {
-            if (playerTiles[i] != null && playerTiles[i + 1] != null &&
-                playerTiles[i].getValue() == playerTiles[i + 1].getValue()) {
-                tileToDiscard = playerTiles[i];
-                break;
+            for (int j = i + 1; j < playerTiles.length - 1; j++) {
+                if (playerTiles[i] != null && playerTiles[j] != null &&
+                    playerTiles[i].getValue() == playerTiles[j].getValue() &&
+                    playerTiles[i].getColor() == playerTiles[j].getColor()) {
+                    tileToDiscard = playerTiles[i];
+                    break;
+                }
             }
         }
     
